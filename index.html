@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+
+    <script src = "movement.js" ></script>
+    <script src = "time.js"></script>
+    <script src = "fishGen.js" ></script>
+  </head>
+
+
+  <body>
+    <a-scene timer fishgen id = "scene" background="color:#026F90" physics = "debug : false" >
+
+      <a-entity id="look" look-controls camera position="0 5 0">
+        <a-entity id = "gameOver" position = "0 0 -0.5" visible = "false" text = "value : Game Over ; width : 5 ; height : 5 ; color : white ; align : center" ></a-entity>
+        <a-entity id = "youWon" position = "0 0 -0.5" visible = "false" text = "value : You Won ; width : 5 ; height : 5 ; color : white ; align : center" ></a-entity>
+        <a-entity position = "0 0.5 0" >
+          <a-entity position = "-3.7 1.75 -4" text = "value : Coins to\nCollect ; width : 5 ; height : 5 ; color : white ; align : center" ></a-entity>
+          <a-entity id = "coin" position = "-2.75 1.75 -4" text = "value : 5 ; width : 10 ; height : 5 ; color : white ; align : center" ></a-entity>
+          <a-entity position = "-3.7 2.5 -4" text = "value : Time\nRemaining ; width : 5 ; height : 5 ; color : white ; align : center" ></a-entity>
+          <a-entity position = "-2.75 2.5 -4" >
+            <a-entity id = "min" position = "-0.2 0 0" text = "value : 5 ; width : 10 ; height : 5 ; color : white ; align : center" ></a-entity>
+            <a-entity position = "0 0.04 0" text = "value : : ; width : 10 ; height : 5 ; color : white ; align : center" ></a-entity>
+            <a-entity id = "sec" position = "0.3 0 0" text = "value : 00 ; width : 10 ; height : 5 ; color : white ; align : center" ></a-entity>
+          </a-entity>
+        </a-entity>
+        <a-entity position = "2.75 3 -4" text = "value : Score : ; width : 10 ; height : 5 ; color : white ; align : center" ></a-entity>
+        <a-entity id = "score" position = "3.75 3 -4" text = "value :0 ; width : 10 ; height : 5 ; color : white ; align : center" ></a-entity>
+      </a-entity>
+
+      <a-assets>    
+        <a-asset-item
+          id = "fish"
+          src = "fish/scene.gltf"
+        ></a-asset-item>
+        
+        <a-asset-item
+          id="terrainMap"
+          src="underWaterTerrain/scene.gltf"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="diverModel"
+          src="diver.glb"
+        ></a-asset-item>        
+      </a-assets>
+
+      <a-entity id="diver"
+        dynamic-body = "mass : 0"
+        gltf-model="#diverModel"
+        position="0 4.75 -0.1"
+        scale="0.125 0.125 0.125"
+        rotation = "0 180 0">
+      </a-entity>
+
+      <a-entity
+        id="terrain"
+        gltf-model="#terrainMap"
+        position="0 0 0"
+        scale = "4 4 4"
+        wsad
+        animation="property: position; to: 0 0 1000;easing:linear; loop: true; dur: 10000000" >
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
